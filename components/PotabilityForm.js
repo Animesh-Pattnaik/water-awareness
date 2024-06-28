@@ -1,4 +1,5 @@
 // components/PotabilityForm.js
+
 import { useState } from "react";
 import { checkPotability } from "../utils/api";
 import ResultMessage from "./ResultMessage";
@@ -26,8 +27,10 @@ const PotabilityForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // console.log("Form data before submission:", formData);
       const data = await checkPotability(formData);
-      setResult(data);
+      console.log("Result received from API:", data);
+      setResult(data.result);
       setError(null);
     } catch (error) {
       console.error("Error checking potability:", error);
@@ -44,159 +47,25 @@ const PotabilityForm = () => {
         </h2>
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="flex flex-col">
-              <label
-                htmlFor="pH"
-                className="block text-sm font-medium text-gray-700"
-              >
-                pH
-              </label>
-              <input
-                type="text"
-                id="pH"
-                name="pH"
-                value={formData.pH}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Hardness"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Hardness
-              </label>
-              <input
-                type="text"
-                id="Hardness"
-                name="Hardness"
-                value={formData.Hardness}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Solids"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Solids
-              </label>
-              <input
-                type="text"
-                id="Solids"
-                name="Solids"
-                value={formData.Solids}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Chloramines"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Chloramines
-              </label>
-              <input
-                type="text"
-                id="Chloramines"
-                name="Chloramines"
-                value={formData.Chloramines}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Sulfate"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Sulfate
-              </label>
-              <input
-                type="text"
-                id="Sulfate"
-                name="Sulfate"
-                value={formData.Sulfate}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Conductivity"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Conductivity
-              </label>
-              <input
-                type="text"
-                id="Conductivity"
-                name="Conductivity"
-                value={formData.Conductivity}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Organic_carbon"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Organic Carbon
-              </label>
-              <input
-                type="text"
-                id="Organic_carbon"
-                name="Organic_carbon"
-                value={formData.Organic_carbon}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Trihalomethanes"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Trihalomethanes
-              </label>
-              <input
-                type="text"
-                id="Trihalomethanes"
-                name="Trihalomethanes"
-                value={formData.Trihalomethanes}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Turbidity"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Turbidity
-              </label>
-              <input
-                type="text"
-                id="Turbidity"
-                name="Turbidity"
-                value={formData.Turbidity}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
+            {Object.keys(formData).map((key) => (
+              <div key={key}>
+                <label
+                  htmlFor={key}
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {key.replace("_", " ")}
+                </label>
+                <input
+                  type="text"
+                  id={key}
+                  name={key}
+                  value={formData[key]}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+              </div>
+            ))}
           </div>
           <button
             type="submit"
@@ -205,9 +74,8 @@ const PotabilityForm = () => {
             Submit
           </button>
         </form>
-        {result && (
-          <ResultMessage result={result} />
-        )}
+        {result !== null && <ResultMessage result={result} />}
+        {error && <p className="mt-4 text-center text-red-600">{error}</p>}
       </div>
     </section>
   );
