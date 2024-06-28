@@ -1,4 +1,4 @@
-const API_KEY = "";
+const API_KEY = "qrY78v4fWGNjC6O2f9Gc_astixNpnD5bN0V8T63AKKsH";
 
 
 const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/13ecb52f-1e47-46a9-aad7-9e9a89f200e5/predictions?version=2021-05-01";
@@ -14,7 +14,7 @@ function getToken() {
 
     req.onload = () => {
       if (req.status >= 200 && req.status < 300) {
-        console.log("Token received:", JSON.parse(req.responseText).access_token);
+        // console.log("Token received:", JSON.parse(req.responseText).access_token);
         resolve(JSON.parse(req.responseText).access_token);
       } else {
         reject(req.statusText);
@@ -36,7 +36,7 @@ function apiPost(scoring_url, token, payload) {
 
     oReq.onload = () => {
       if (oReq.status >= 200 && oReq.status < 300) {
-        console.log("API response:", JSON.parse(oReq.responseText));
+        // console.log("API response:", JSON.parse(oReq.responseText));
         resolve(JSON.parse(oReq.responseText));
       } else {
         reject(oReq.statusText);
