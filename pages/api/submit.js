@@ -1,4 +1,4 @@
-const API_KEY = "qrY78v4fWGNjC6O2f9Gc_astixNpnD5bN0V8T63AKKsH";
+const API_KEY = "";
 
 
 const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/13ecb52f-1e47-46a9-aad7-9e9a89f200e5/predictions?version=2021-05-01";
