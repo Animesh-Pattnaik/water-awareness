@@ -1,7 +1,7 @@
 const API_KEY = "";
 
 
-const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/13ecb52f-1e47-46a9-aad7-9e9a89f200e5/predictions?version=2021-05-01";
+const scoring_url = "";
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 function getToken() {

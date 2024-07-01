@@ -19,6 +19,11 @@ const Header = () => (
             </Link>
           </li>
           <li>
+            <Link href="/#articles">
+              <p className="hover:text-gray-200">Articles</p>
+            </Link>
+          </li>
+          <li>
             <Link href="/#disease">
               <p className="hover:text-gray-200">Diseases</p>
             </Link>
