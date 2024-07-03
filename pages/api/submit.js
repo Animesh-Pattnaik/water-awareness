@@ -1,8 +1,8 @@
-const API_KEY = "";
-
-
-const scoring_url = "";
+require('dotenv').config();
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+const API_KEY = process.env.API_KEY;
+const scoring_url = process.env.SCORING_URL;
 
 function getToken() {
   return new Promise((resolve, reject) => {
